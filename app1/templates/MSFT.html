@@ -1,0 +1,237 @@
+{% extends 'index.html' %}
+{% block des %}
+    <div id="app"></div>
+
+    <div id="html">
+      &lt;div id=&quot;chart&quot;&gt;
+  &lt;ReactApexChart options={this.state.options} series={this.state.series} type=&quot;line&quot; height={350} /&gt;
+&lt;/div&gt;
+    </div>
+
+    <script type="text/babel">
+     var Open = {{Open}};
+     var High = {{High}};
+     var Low = {{Low}};
+     var Close ={{Close}};
+     var Date={{ Dates|safe }};
+      class ApexChart extends React.Component {
+
+        constructor(props) {
+          super(props);
+
+          this.state = {
+
+            series: [{
+                name: "Open Value",
+                data: Open
+              },
+              {
+                name: "High Value",
+                data: High
+              },
+              {
+                name: 'Low Value',
+                data: Low
+              },
+              {
+                name: 'Close Value',
+                data: Close
+              }
+            ],
+            options: {
+              chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                  enabled: false
+                },
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                width: [5, 7, 5],
+                curve: 'straight',
+                dashArray: [0, 8, 5]
+              },
+              title: {
+                text: 'MSFT Statistics',
+                align: 'left'
+              },
+              legend: {
+                tooltipHoverFormatter: function(val, opts) {
+                  return val + ' - <strong>' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + '</strong>'
+                }
+              },
+              markers: {
+                size: 0,
+                hover: {
+                  sizeOffset: 6
+                }
+              },
+              xaxis: {
+                categories: Date ,
+              },
+              tooltip: {
+                y: [
+                  {
+                    title: {
+                      formatter: function (val) {
+                        return val + " (mins)"
+                      }
+                    }
+                  },
+                  {
+                    title: {
+                      formatter: function (val) {
+                        return val + " per session"
+                      }
+                    }
+                  },
+                  {
+                    title: {
+                      formatter: function (val) {
+                        return val;
+                      }
+                    }
+                  }
+                ]
+              },
+              grid: {
+                borderColor: '#f1f1f1',
+              }
+            },
+
+
+          };
+        }
+
+
+
+        render() {
+          return (
+            <div>
+              <div id="chart">
+                <ReactApexChart options={this.state.options} series={this.state.series} type="line" height={350} />
+              </div>
+              <div id="html-dist"></div>
+            </div>
+          );
+        }
+      }
+
+      const domContainer = document.querySelector('#app');
+      ReactDOM.render(React.createElement(ApexChart), domContainer);
+    </script>
+
+    <div id="app1"></div>
+
+    <div id="html1">
+      &lt;div id=&quot;chart1&quot;&gt;
+  &lt;ReactApexChart options={this.state.options} series={this.state.series} type=&quot;line&quot; height={350} /&gt;
+&lt;/div&gt;
+    </div>
+
+    <script type="text/babel">
+    var Volume ={{Volume}};
+    var Date={{ Dates|safe }};
+      class ApexChart extends React.Component {
+        constructor(props) {
+          super(props);
+
+          this.state = {
+
+            series: [{
+                name: 'Volume',
+                data: Volume
+              }
+            ],
+            options: {
+              chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                  enabled: false
+                },
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                width: [5, 7, 5],
+                curve: 'straight',
+                dashArray: [0, 8, 5]
+              },
+              title: {
+                text: 'MSFT Volume Statistics',
+                align: 'left'
+              },
+              legend: {
+                tooltipHoverFormatter: function(val, opts) {
+                  return val + ' - <strong>' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + '</strong>'
+                }
+              },
+              markers: {
+                size: 0,
+                hover: {
+                  sizeOffset: 6
+                }
+              },
+              xaxis: {
+                categories: Date,
+              },
+              tooltip: {
+                y: [
+                  {
+                    title: {
+                      formatter: function (val) {
+                        return val + " (mins)"
+                      }
+                    }
+                  },
+                  {
+                    title: {
+                      formatter: function (val) {
+                        return val + " per session"
+                      }
+                    }
+                  },
+                  {
+                    title: {
+                      formatter: function (val) {
+                        return val;
+                      }
+                    }
+                  }
+                ]
+              },
+              grid: {
+                borderColor: '#f1f1f1',
+              }
+            },
+
+
+          };
+        }
+
+
+
+        render() {
+          return (
+            <div>
+              <div id="chart1">
+                <ReactApexChart options={this.state.options} series={this.state.series} type="line" height={350} />
+              </div>
+              <div id="html-dist1"></div>
+            </div>
+          );
+        }
+      }
+
+      const domContainer = document.querySelector('#app1');
+      ReactDOM.render(React.createElement(ApexChart), domContainer);
+    </script>
+
+
+
+{% endblock %}
